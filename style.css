@@ -1,0 +1,561 @@
+/* ==========================================================================
+   CAFE SHOP - SHARED STYLESHEET (style.css)
+   មានមតិយោបល់ពន្យល់ (Notes) អំពី CSS Properties ទាំងអស់
+   ========================================================================== */
+
+/* :root - កំណត់ CSS Custom Properties (Variables) សម្រាប់ប្រើទូទាំងគេហទំព័រ */
+:root {
+    --primary: #5c3a21;        /* color: ពណ៌ត្នោតកាហ្វេចាស់ (Primary Brand Color) */
+    --primary-dark: #3e2514;   /* color: ពណ៌ត្នោតងងឹតសម្រាប់ពេល Hover */
+    --accent: #c88a4b;         /* color: ពណ៌មាសការ៉ាមែល (Accent Highlight) */
+    --bg-cream: #faf6f1;       /* background-color: ផ្ទៃខាងក្រោយពណ៌ក្រែមស្រទន់ */
+    --bg-card: #ffffff;        /* background-color: ផ្ទៃខាងក្រោយកាតពណ៌ស */
+    --text-main: #2b1d14;      /* color: ពណ៌អក្សរគោល */
+    --text-muted: #6e5849;     /* color: ពណ៌អក្សរស្រាលសម្រាប់ការពិពណ៌នា */
+    --border-color: #e6dacb;   /* border-color: ពណ៌បន្ទាត់ស៊ុម */
+    --shadow-sm: 0 4px 12px rgba(43, 29, 20, 0.06); /* box-shadow: ស្រមោលស្រាល */
+    --shadow-md: 0 10px 25px rgba(43, 29, 20, 0.12);/* box-shadow: ស្រមោលមធ្យម */
+    --radius-md: 12px;         /* border-radius: កម្រិតកោងជ្រុងមធ្យម */
+    --radius-lg: 20px;         /* border-radius: កម្រិតកោងជ្រុងធំ */
+    --transition: all 0.3s ease; /* transition: ចលនាផ្លាស់ប្តូរដោយរលូន */
+}
+
+/* * (Universal Selector) - កំណត់ Box Model ស្តង់ដារ */
+* {
+    box-sizing: border-box; /* បញ្ចូល padding និង border ទៅក្នុងទំហំ width/height សរុប */
+    margin: 0;              /* លុបគម្លាតខាងក្រៅដើមរបស់ Browser */
+    padding: 0;             /* លុបគម្លាតខាងក្នុងដើមរបស់ Browser */
+}
+
+html {
+    scroll-behavior: smooth; /* ធ្វើឱ្យការរំកិលទំព័រ (Scroll) មានភាពរលូន */
+}
+
+body {
+    font-family: 'Kantumruy Pro', 'Poppins', sans-serif; /* ពុម្ពអក្សរខ្មែរ និងអង់គ្លេស */
+    background-color: var(--bg-cream); /* ពណ៌ផ្ទៃខាងក្រោយ */
+    color: var(--text-main);           /* ពណ៌អក្សរ */
+    line-height: 1.65;                 /* គម្លាតកម្ពស់បន្ទាត់អក្សរ */
+    display: flex;                     /* ប្រើ Flexbox ដើម្បីរុញ Footer ទៅបាតទំព័រ */
+    flex-direction: column;            /* តម្រៀបធាតុពីលើចុះក្រោម */
+    min-height: 100vh;                 /* កម្ពស់អប្បបរមាស្មើនឹង 100% នៃអេក្រង់ */
+}
+
+/* ==========================================================================
+   HEADER & NAVIGATION BAR (របារម៉ឺនុយខាងលើ)
+   ========================================================================== */
+header {
+    position: sticky;          /* ជាប់នៅខាងលើអេក្រង់ជានិច្ចពេល Scroll */
+    top: 0;                    /* ចម្ងាយពីគែមខាងលើ = 0 */
+    z-index: 1000;             /* លំដាប់ស្រទាប់ខ្ពស់ជាងគេដើម្បីកុំឱ្យធាតុផ្សេងបាំង */
+    background: rgba(250, 246, 241, 0.92); /* ផ្ទៃខាងក្រោយថ្លាបន្តិច */
+    backdrop-filter: blur(10px); /* ធ្វើឱ្យផ្ទៃខាងក្រោយព្រិល (Glassmorphism) */
+    border-bottom: 1px solid var(--border-color); /* បន្ទាត់ខណ្ឌខាងក្រោម */
+}
+
+.navbar {
+    max-width: 1200px;         /* ទទឹងអតិបរមា */
+    margin: 0 auto;            /* តម្រឹមកណ្តាលផ្ដេក */
+    padding: 0.9rem 1.5rem;    /* គម្លាតខាងក្នុងលើក្រោម 0.9rem, ឆ្វេងស្តាំ 1.5rem */
+    display: flex;             /* តម្រៀបធាតុជាជួរដេក */
+    justify-content: space-between; /* ចែកចន្លោះស្មើគ្នារវាង Logo, Links និង Actions */
+    align-items: center;       /* តម្រឹមកណ្តាលបញ្ឈរ */
+    gap: 1rem;                 /* គម្លាតរវាងធាតុនីមួយៗ */
+}
+
+.logo {
+    font-size: 1.5rem;         /* ទំហំអក្សរ */
+    font-weight: 700;          /* កម្រាស់អក្សរដិត */
+    color: var(--primary);     /* ពណ៌អក្សរ */
+    text-decoration: none;     /* លុបបន្ទាត់ពីក្រោម Link */
+    display: flex;             /* ប្រើ Flex ដើម្បីតម្រឹម Icon និងអក្សរ */
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-links {
+    list-style: none;          /* លុបចំណុចមូលៗរបស់ <ul> */
+    display: flex;             /* តម្រៀប Link ជាជួរដេក */
+    gap: 1.5rem;               /* គម្លាតរវាង Link */
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-weight: 500;
+    padding: 0.4rem 0.6rem;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary);
+    background-color: rgba(200, 138, 75, 0.15); /* ពណ៌ផ្ទៃពេល Hover ឬ Active */
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* ==========================================================================
+   BUTTONS (ប៊ូតុងទូទៅ)
+   ========================================================================== */
+.btn {
+    display: inline-flex;      /* តម្រៀបអក្សរ និង Icon ក្នុងប៊ូតុង */
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.35rem;
+    border-radius: 50px;       /* ប៊ូតុងរាងមូលទ្រវែង (Pill Shape) */
+    font-family: inherit;      /* ប្រើពុម្ពអក្សរដូច Body */
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;           /* ប្តូរសញ្ញាព្រួញ Mouse ទៅជារូបដៃ */
+    border: none;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px); /* លើកប៊ូតុងឡើងលើបន្តិចពេល Hover */
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 1.5px solid var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline:hover {
+    background-color: var(--primary);
+    color: #ffffff;
+}
+
+.cart-btn {
+    position: relative;        /* សម្រាប់ដាក់ Badge ចំនួនទំនិញនៅជ្រុងខាងលើ */
+    background-color: var(--primary);
+    color: #fff;
+    padding: 0.55rem 1rem;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.cart-badge {
+    background-color: var(--accent);
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 0.1rem 0.5rem;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+/* ==========================================================================
+   LAYOUT CONTAINERS & SECTIONS
+   ========================================================================== */
+main {
+    flex: 1;                   /* ពង្រីកផ្នែក Main ឱ្យពេញចន្លោះទំនេរ */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem;
+}
+
+.page-banner {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary)); /* ពណ៌ Gradient */
+    color: #ffffff;
+    text-align: center;
+    padding: 4rem 1.5rem;
+}
+
+.page-banner h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.page-banner p {
+    color: #f0e4d7;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.section-title h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 0.4rem;
+}
+
+/* ==========================================================================
+   HERO SECTION (ផ្នែកបង្ហាញដំបូងលើទំព័រដើម)
+   ========================================================================== */
+.hero {
+    background: linear-gradient(rgba(43, 29, 20, 0.68), rgba(43, 29, 20, 0.75)),
+                url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1400&q=80') center/cover no-repeat;
+    color: #ffffff;
+    text-align: center;
+    padding: 6.5rem 1.5rem;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    max-width: 650px;
+    margin: 0 auto 2rem;
+    color: #f3e8dc;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;           /* អនុញ្ញាតឱ្យធាតុចុះបន្ទាត់ពេលអេក្រង់តូច */
+}
+
+/* ==========================================================================
+   GRID CARDS (ម៉ឺនុយ សេវាកម្ម និងក្រុមការងារ)
+   ========================================================================== */
+.grid-3 {
+    display: grid;             /* ប្រើ CSS Grid សម្រាប់បែងចែកជួរឈរ */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* បត់បែនតាមទំហំអេក្រង់ស្វ័យប្រវត្តិ */
+    gap: 1.8rem;               /* គម្លាតរវាងកាតនីមួយៗ */
+}
+
+.card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;          /* កាត់ផ្នែកលើសចេញពីជ្រុងកោង */
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+}
+
+.card-img {
+    width: 100%;               /* ទទឹងពេញកាត */
+    height: 210px;             /* កម្ពស់ថេរ */
+    object-fit: cover;         /* កាត់តម្រឹមរូបភាពកុំឱ្យខូចទ្រង់ទ្រាយ */
+}
+
+.card-body {
+    padding: 1.4rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-category {
+    font-size: 0.78rem;
+    text-transform: uppercase; /* ប្តូរអក្សរអង់គ្លេសទៅជាអក្សរធំទាំងអស់ */
+    letter-spacing: 0.05em;    /* គម្លាតរវាងតួអក្សរ */
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+}
+
+.card-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+    flex: 1;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.9rem;
+    border-top: 1px dashed var(--border-color); /* បន្ទាត់ដាច់ៗ */
+}
+
+.price-tag {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1.05rem;
+}
+
+.price-khr {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   FILTER BAR & SEARCH (របារស្វែងរក និងចម្រោះម៉ឺនុយ)
+   ========================================================================== */
+.filter-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.1rem;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-card);
+    color: var(--text-main);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+.search-input {
+    padding: 0.6rem 1.1rem;
+    border-radius: 30px;
+    border: 1px solid var(--border-color);
+    font-family: inherit;
+    min-width: 240px;
+    outline: none;             /* លុបស៊ុមពណ៌ខៀវដើមពេលចុច */
+}
+
+.search-input:focus {
+    border-color: var(--primary); /* ប្តូរពណ៌ស៊ុមពេលកំពុងវាយអក្សរ */
+}
+
+/* ==========================================================================
+   FORMS & CONTACT / BOOKING LAYOUT
+   ========================================================================== */
+.two-col {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    align-items: start;
+}
+
+.form-box {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+    font-size: 0.92rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.7rem 0.95rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    font-family: inherit;
+    font-size: 0.95rem;
+    background-color: #fff;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+/* ==========================================================================
+   CART DRAWER (ផ្ទាំងកន្ត្រកទំនិញរអិលចេញពីចំហៀង)
+   ========================================================================== */
+.cart-overlay {
+    position: fixed;           /* គ្របលើអេក្រង់ទាំងមូល */
+    inset: 0;                  /* ស្មើនឹង top:0; right:0; bottom:0; left:0; */
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1500;
+    display: none;             /* លាក់ទុកជាមុន */
+}
+
+.cart-overlay.open {
+    display: block;            /* បង្ហាញពេលបន្ថែម Class 'open' */
+}
+
+.cart-drawer {
+    position: fixed;
+    top: 0;
+    right: -400px;             /* លាក់នៅខាងស្តាំក្រៅអេក្រង់ */
+    width: 100%;
+    max-width: 380px;
+    height: 100vh;
+    background: var(--bg-card);
+    z-index: 1600;
+    box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+    transition: right 0.35s ease; /* ចលនារអិលចូល-ចេញ */
+    display: flex;
+    flex-direction: column;
+}
+
+.cart-drawer.open {
+    right: 0;                  /* រអិលចូលមកក្នុងអេក្រង់ */
+}
+
+.cart-header {
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;          /* អនុញ្ញាតឱ្យ Scroll បញ្ឈរបើទំនិញច្រើន */
+    padding: 1.2rem 1.5rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.qty-btn {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--border-color);
+    background: var(--bg-cream);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.cart-footer {
+    padding: 1.2rem 1.5rem;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-cream);
+}
+
+/* ==========================================================================
+   FOOTER (ផ្នែកបាតគេហទំព័រ)
+   ========================================================================== */
+footer {
+    background-color: var(--primary-dark);
+    color: #e8dcd0;
+    padding: 3rem 1.5rem 1.5rem;
+    margin-top: auto;
+}
+
+.footer-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+
+.footer-grid h3 {
+    color: #ffffff;
+    margin-bottom: 0.9rem;
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+    color: #e8dcd0;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    color: var(--accent);
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 1.5rem;
+    font-size: 0.88rem;
+    color: #bfa995;
+}
+
+/* ==========================================================================
+   RESPONSIVE MEDIA QUERIES (សម្របតាមអេក្រង់ទូរស័ព្ទ)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+    }
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        order: 3;              /* រុញម៉ឺនុយចុះជួរទី ២ លើអេក្រង់តូច */
+        padding-top: 0.5rem;
+        border-top: 1px solid var(--border-color);
+    }
+    .hero h1 {
+        font-size: 2.1rem;
+    }
+}

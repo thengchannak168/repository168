@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!-- lang="km": កំណត់ភាសាគោលរបស់ឯកសារ HTML -->
+<html lang="km">
+<head>
+    <!-- charset="UTF-8": គាំទ្រតួអក្សរខ្មែរ និងនិមិត្តសញ្ញាអន្តរជាតិ -->
+    <meta charset="UTF-8">
+    <!-- viewport: ធ្វើឱ្យគេហទំព័រ Responsive លើទូរស័ព្ទ និងថេប្លេត -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ម៉ឺនុយ | Cafe Shop</title>
+    <!-- Google Fonts: ពុម្ពអក្សរ Kantumruy Pro (ខ្មែរ) និង Poppins (អង់គ្លេស) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- rel="stylesheet" & href: ភ្ជាប់ទៅកាន់ឯកសារ CSS រួម -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- HEADER: របារម៉ឺនុយរុករករួមសម្រាប់គ្រប់ទំព័រ -->
+    <header>
+        <nav class="navbar" aria-label="Main Navigation">
+            <a href="index.html" class="logo">☕ Cafe Shop</a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="" data-i18n="nav_home">ទំព័រដើម</a></li>
+                <li><a href="menu.html" class="active" data-i18n="nav_menu">ម៉ឺនុយ</a></li>
+                <li><a href="about.html" class="" data-i18n="nav_about">អំពីយើង</a></li>
+                <li><a href="contact.html" class="" data-i18n="nav_contact">ទំនាក់ទំនង</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="langToggleBtn" class="btn btn-outline" style="padding: 0.45rem 0.9rem;">EN 🇬🇧</button>
+                <button class="cart-btn" onclick="toggleCart(true)">
+                    🛒 <span data-i18n="cart_btn">កន្ត្រក</span>
+                    <span id="cartBadge" class="cart-badge">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- PAGE BANNER -->
+        <section class="page-banner">
+            <h1 data-i18n="menu_page_title">ម៉ឺនុយភេសជ្ជៈ និងនំ</h1>
+            <p data-i18n="menu_page_sub">ជ្រើសរើសរសជាតិដែលអ្នកពេញចិត្ត ហើយបញ្ជាទិញភ្លាមៗ</p>
+        </section>
+
+        <!-- MENU FILTER & GRID -->
+        <section class="container">
+            <div class="filter-controls">
+                <div class="filter-tabs">
+                    <button class="filter-btn active" onclick="filterMenu('all', this)" data-i18n="filter_all">ទាំងអស់</button>
+                    <button class="filter-btn" onclick="filterMenu('hot', this)" data-i18n="filter_hot">កាហ្វេក្តៅ</button>
+                    <button class="filter-btn" onclick="filterMenu('iced', this)" data-i18n="filter_iced">កាហ្វេទឹកកក</button>
+                    <button class="filter-btn" onclick="filterMenu('tea', this)" data-i18n="filter_tea">តែ & ម៉ាត់ឆា</button>
+                    <button class="filter-btn" onclick="filterMenu('bakery', this)" data-i18n="filter_bakery">នំដុត</button>
+                </div>
+                <input type="search" id="searchInput" class="search-input" oninput="renderMenuCards()" placeholder="ស្វែងរកភេសជ្ជៈ...">
+            </div>
+
+            <!-- កន្លែងបង្ហាញកាតម៉ឺនុយពី JavaScript -->
+            <div id="menuGrid" class="grid-3"></div>
+        </section>
+    </main>
+
+    <!-- CART DRAWER: ផ្ទាំងកន្ត្រកបញ្ជាទិញ -->
+    <div id="cartOverlay" class="cart-overlay" onclick="toggleCart(false)"></div>
+    <aside id="cartDrawer" class="cart-drawer" aria-label="Shopping Cart">
+        <div class="cart-header">
+            <h3 data-i18n="cart_title">កន្ត្រកបញ្ជាទិញ</h3>
+            <button onclick="toggleCart(false)" style="background:none; border:none; font-size:1.3rem; cursor:pointer;">✕</button>
+        </div>
+        <div id="cartItemsContainer" class="cart-items"></div>
+        <div class="cart-footer">
+            <div style="display:flex; justify-content:space-between; margin-bottom:1rem; font-weight:700;">
+                <span data-i18n="cart_total">សរុបរួម៖</span>
+                <span id="cartTotalDisplay">$0.00</span>
+            </div>
+            <button class="btn btn-primary" style="width:100%;" onclick="checkoutOrder()" data-i18n="btn_checkout">បញ្ជាទិញឥឡូវនេះ</button>
+        </div>
+    </aside>
+
+    <!-- FOOTER: ផ្នែកបាតគេហទំព័រ -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>☕ Cafe Shop</h3>
+                <p data-i18n="footer_desc">ហាងកាហ្វេដែលផ្តល់ជូននូវរសជាតិកាហ្វេពិត និងបរិយាកាសដ៏ស្រស់ស្រាយ។</p>
+            </div>
+            <div>
+                <h3 data-i18n="footer_links_title">តំណភ្ជាប់រហ័ស</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html" data-i18n="nav_home">ទំព័រដើម</a></li>
+                    <li><a href="menu.html" data-i18n="nav_menu">ម៉ឺនុយ</a></li>
+                    <li><a href="about.html" data-i18n="nav_about">អំពីយើង</a></li>
+                    <li><a href="contact.html" data-i18n="nav_contact">ទំនាក់ទំនង</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 data-i18n="footer_hours_title">ម៉ោងបើកដំណើរការ</h3>
+                <p data-i18n="footer_hours_1">ច័ន្ទ - សុក្រ: 7:00 AM - 9:00 PM</p>
+                <p data-i18n="footer_hours_2">សៅរ៍ - អាទិត្យ: 7:30 AM - 10:00 PM</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Cafe Shop Cambodia. All rights reserved.
+        </div>
+    </footer>
+
+    <!-- ភ្ជាប់ឯកសារ JavaScript រួម -->
+    <script src="script.js"></script>
+</body>
+</html>
